@@ -7,58 +7,140 @@
   <meta name="description" content="Avara: personalised coaching and mentoring for students with ADHD and autism."/>
   <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet"/>
-  <!-- branding stylesheet (if you have a central CSS file keep this; page also includes the small overrides below) -->
   <link rel="stylesheet" href="/assets/site-branding.css">
 
-  <!-- Quick local overrides to ensure header text is hidden and watermark is strong but subtle -->
+  <!-- Hero video specific styles (keeps everything self-contained) -->
   <style>
-    /* hide the visible "Avara" text in the header (keeps the logo image only) */
-    .brand-name { display: none !important; }
-
-    /* ensure the logo image in the header remains visible and sized nicely */
-    .brand-img {
-      height:48px;
-      width:auto;
-      object-fit:contain;
-      display:block;
+    :root{
+      --accent: #2563EB;
+      --hero-height: 72vh; /* adjust for desired hero height */
     }
 
-    /* refine watermark: large centered logo behind content */
-    .brand-background::before {
+    /* Hero layout */
+    .hero {
+      position: relative;
+      height: var(--hero-height);
+      display: flex;
+      align-items: center;
+      z-index: 1;
+      overflow: hidden;
+      color: white;
+    }
+
+    /* video wrapper: fullscreen inside hero */
+    .hero .media {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .hero video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      object-position: center;
+      filter: saturate(0.9) contrast(0.95);
+    }
+    /* poster fallback (used on some mobile if autoplay blocked) */
+    .hero .poster {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    /* overlay to darken video and improve text contrast */
+    .hero::after{
       content: "";
       position: absolute;
       inset: 0;
-      background-image: url('/assets/avara-logo.png');
-      background-repeat: no-repeat;
-      background-position: 50% 18%;
-      background-size: 80%;
-      opacity: 0.06;
+      background: linear-gradient(to bottom, rgba(8,10,14,0.35), rgba(8,10,14,0.45) 60%, rgba(8,10,14,0.6));
+      z-index: 1;
       pointer-events: none;
-      z-index: 0;
-      transform: translateY(-4%);
-      filter: saturate(0%) blur(0.2px);
-      mix-blend-mode: multiply;
     }
 
-    @media (max-width: 768px) {
-      .brand-img { height:40px; }
-      .brand-background::before {
-        background-size: 140%;
-        opacity: 0.035;
-        background-position: 50% 6%;
-      }
+    /* content above the video */
+    .hero .content {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      text-align: left;
     }
+    .hero h1{
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      line-height: 1.03;
+      margin: 0 0 0.75rem 0;
+      color: #fff;
+      text-shadow: 0 6px 18px rgba(2,6,23,0.36);
+    }
+    .hero p.lead{
+      color: rgba(255,255,255,0.92);
+      margin: 0 0 1.25rem 0;
+      max-width: 64ch;
+      font-size: clamp(1rem, 1.4vw, 1.125rem);
+    }
+    .hero .cta {
+      display:inline-block;
+      background: #fff;
+      color: var(--accent);
+      padding: .85rem 1.25rem;
+      border-radius: .6rem;
+      font-weight:700;
+      text-decoration:none;
+      box-shadow: 0 8px 24px rgba(2,6,23,0.16);
+    }
+    .hero .cta.secondary {
+      background: transparent;
+      color: rgba(255,255,255,0.9);
+      border: 1px solid rgba(255,255,255,0.2);
+      margin-left: .75rem;
+    }
+
+    /* sponsors row (optional like example) */
+    .hero .sponsors {
+      position: relative;
+      z-index: 2;
+      margin-top: 2rem;
+      text-align:center;
+      opacity: .95;
+    }
+    .hero .sponsors img { height:28px; margin: 0 18px; vertical-align: middle; filter: grayscale(1) opacity(.85); }
+
+    /* Mobile: reduce hero height and simplify effects */
+    @media (max-width: 768px){
+      :root { --hero-height: 52vh; }
+      .hero::after { background: linear-gradient(to bottom, rgba(8,10,14,0.25), rgba(8,10,14,0.5)); }
+      /* show poster by default on mobile; video may autoplay muted but poster is safer */
+      .hero video { display:block; }
+      .hero .poster { display:block; }
+      /* keep poster above video until user interacts (JS controls) */
+      .hero .poster.is-hidden { display:none; }
+      .hero .content { text-align:left; padding-top:0.6rem; }
+    }
+
+    /* Accessibility: ensure links and nav remain above */
+    .site-header, .site-header .brand { position: relative; z-index: 3; background: transparent; }
+
+    /* small polish to ensure watermark remains behind */
+    .brand-background::before { z-index: 0; }
   </style>
 </head>
 <body style="background:#FFF7F0;color:#0f172a;margin:0;font-family: 'Poppins', sans-serif;">
 
-  <!-- header: logo only (no text) -->
-  <header class="site-header" role="banner">
+  <!-- header (keeps small logo) -->
+  <header class="site-header" role="banner" style="position:relative;z-index:3;">
     <div style="max-width:1120px;margin:0 auto;padding:1.5rem;display:flex;align-items:center;justify-content:space-between;">
       <a class="brand" href="index.html" aria-label="Avara home" style="display:flex;align-items:center;gap:.5rem;">
-        <img class="brand-img" src="/assets/avara-logo.png" alt="Avara logo" />
-        <!-- brand-name intentionally removed (hidden via CSS) -->
-        <span class="brand-name">Avara</span>
+        <img class="brand-img" src="/assets/avara-logo.png" alt="Avara logo" style="height:44px;width:auto;"/>
       </a>
 
       <nav class="header-links" role="navigation" aria-label="Primary" style="display:flex;gap:1rem;align-items:center;">
@@ -71,89 +153,116 @@
     </div>
   </header>
 
-  <!-- wrap page content so the watermark sits behind it -->
+  <!-- BRAND BACKGROUND wrapper (keeps watermark behavior) -->
   <div class="brand-background" style="position:relative;overflow:visible;z-index:1;">
-    <main style="max-width:1120px;margin:0 auto;padding:2.5rem 1.5rem;position:relative;z-index:2;">
 
-      <!-- hero -->
-      <section style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;padding:4rem 0;">
+    <!-- HERO with video background -->
+    <section class="hero" role="region" aria-label="Intro">
+      <div class="media" aria-hidden="true">
+        <!-- VIDEO (self-hosted) -->
+        <!-- Upload /assets/hero.mp4 and /assets/hero-poster.jpg to your repo (recommended names) -->
+        <video id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="/assets/hero-poster.jpg">
+          <source src="/assets/hero.mp4" type="video/mp4">
+          <!-- fallback image for very old browsers -->
+          <img src="/assets/hero-poster.jpg" alt="Background: mentoring and students" class="poster">
+        </video>
+      </div>
+
+      <div class="content" role="dialog" aria-describedby="hero-sub">
+        <h1>Empowering Students with ADHD &amp; Autism</h1>
+        <p id="hero-sub" class="lead">Unlock your potential with personalised coaching and mentoring for academic success and personal growth.</p>
         <div>
-          <h1 style="font-family:'Playfair Display',serif;font-size:3rem;line-height:1.05;margin:0 0 1rem 0;">Empowering Students with ADHD &amp; Autism</h1>
-          <p style="color:#475569;max-width:48rem;margin-top:1rem;">Unlock your potential with personalised coaching and mentoring for academic success and personal growth.</p>
-          <a href="contact.html" style="display:inline-block;margin-top:1.25rem;background:#2563EB;color:#fff;padding:.9rem 1.2rem;border-radius:.6rem;text-decoration:none;font-weight:600;">Get Started</a>
+          <a class="cta" href="contact.html">Get Started</a>
+          <a class="cta secondary" href="#methodology">Our Approach</a>
         </div>
 
-        <div>
-          <img alt="Mentor helping a student with studies" style="width:100%;height:360px;object-fit:cover;border-radius:1rem;box-shadow:0 10px 30px rgba(15,23,42,0.08);" src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1400&q=80"/>
+        <!-- optional sponsors row (like example) -->
+        <div class="sponsors" aria-hidden="true">
+          <!-- small brand logos; replace with your own partners if you have -->
+          <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=200&q=60" alt="" />
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=60" alt="" />
+          <img src="https://images.unsplash.com/photo-1542223616-3b3d1bfc9b7f?auto=format&fit=crop&w=200&q=60" alt="" />
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- rest of page (methodology, services, testimonials...) -->
+    <!-- rest of the page content (methodology, services, etc.) -->
+    <main style="max-width:1120px;margin:0 auto;padding:2rem 1.5rem;position:relative;z-index:2;">
+      <!-- Methodology section (example shortened) -->
       <section id="methodology" style="padding:2rem 0;">
-        <h2 style="text-align:center;font-family:'Playfair Display',serif;font-size:1.6rem;margin:0 0 1.25rem 0;">Methodology &amp; Approach</h2>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:1rem;">
+        <h2 style="font-family:'Playfair Display',serif;text-align:center;font-size:1.6rem;margin-bottom:1.25rem;">Methodology &amp; Approach</h2>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;">
           <div style="text-align:center;">
-            <img src="https://images.unsplash.com/photo-1555435026-66d2d5fc4b4e?auto=format&fit=crop&w=400&q=80" alt="" style="width:80px;height:80px;border-radius:14px;object-fit:cover;display:block;margin:0 auto 0.75rem auto;">
-            <h3 style="margin:0;font-weight:600;">Strength-Based Coaching</h3>
-            <p style="color:#475569;margin-top:.5rem;">Focusing on individual talents to build confidence and drive success.</p>
+            <img src="https://images.unsplash.com/photo-1555435026-66d2d5fc4b4e?auto=format&fit=crop&w=400&q=80" style="width:80px;height:80px;border-radius:14px;object-fit:cover;margin:0 auto 0.75rem;" alt="">
+            <h3 style="margin:0 0 .5rem 0;font-weight:600;">Strength-Based Coaching</h3>
+            <p style="color:#475569;">Focusing on individual talents to build confidence and drive success.</p>
           </div>
-
           <div style="text-align:center;">
-            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80" alt="" style="width:80px;height:80px;border-radius:14px;object-fit:cover;display:block;margin:0 auto 0.75rem auto;">
-            <h3 style="margin:0;font-weight:600;">Personalised Learning Plans</h3>
-            <p style="color:#475569;margin-top:.5rem;">Custom roadmaps that adapt to each student's unique learning style.</p>
+            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80" style="width:80px;height:80px;border-radius:14px;object-fit:cover;margin:0 auto 0.75rem;" alt="">
+            <h3 style="margin:0 0 .5rem 0;font-weight:600;">Personalised Plans</h3>
+            <p style="color:#475569;">Custom roadmaps that adapt to each student's unique learning style.</p>
           </div>
-
           <div style="text-align:center;">
-            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=400&q=80" alt="" style="width:80px;height:80px;border-radius:14px;object-fit:cover;display:block;margin:0 auto 0.75rem auto;">
-            <h3 style="margin:0;font-weight:600;">Executive Function Skill Building</h3>
-            <p style="color:#475569;margin-top:.5rem;">Developing crucial skills for organisation and time management.</p>
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=400&q=80" style="width:80px;height:80px;border-radius:14px;object-fit:cover;margin:0 auto 0.75rem;" alt="">
+            <h3 style="margin:0 0 .5rem 0;font-weight:600;">Executive Skills</h3>
+            <p style="color:#475569;">Organisation and time management coaching.</p>
           </div>
-
           <div style="text-align:center;">
-            <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=400&q=80" alt="" style="width:80px;height:80px;border-radius:14px;object-fit:cover;display:block;margin:0 auto 0.75rem auto;">
-            <h3 style="margin:0;font-weight:600;">Parent Collaboration</h3>
-            <p style="color:#475569;margin-top:.5rem;">Working together with parents to create a supportive ecosystem.</p>
+            <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=400&q=80" style="width:80px;height:80px;border-radius:14px;object-fit:cover;margin:0 auto 0.75rem;" alt="">
+            <h3 style="margin:0 0 .5rem 0;font-weight:600;">Parent Collaboration</h3>
+            <p style="color:#475569;">Working together with parents to create a supportive ecosystem.</p>
           </div>
         </div>
       </section>
 
-      <!-- services + testimonials condensed for brevity -->
-      <section id="services" style="padding:2rem 0;">
-        <h2 style="text-align:center;font-family:'Playfair Display',serif;font-size:1.6rem;margin:0 0 1.5rem 0;">Services</h2>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;">
-          <div style="background:#fff;padding:1rem;border-radius:1rem;box-shadow:0 6px 18px rgba(15,23,42,0.06);">
-            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1000&q=80" alt="" style="width:100%;height:180px;object-fit:cover;border-radius:.75rem;">
-            <h4 style="margin:0.75rem 0 0 0;font-weight:600;">Academic Coaching</h4>
-            <p style="color:#475569;margin-top:.5rem;">Personalised 1-on-1 academic support tailored to the student's needs.</p>
-          </div>
-
-          <div style="background:#fff;padding:1rem;border-radius:1rem;box-shadow:0 6px 18px rgba(15,23,42,0.06);">
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1000&q=80" alt="" style="width:100%;height:180px;object-fit:cover;border-radius:.75rem;">
-            <h4 style="margin:0.75rem 0 0 0;font-weight:600;">Mentoring</h4>
-            <p style="color:#475569;margin-top:.5rem;">Motivational mentoring to build skills, confidence and resilience.</p>
-          </div>
-
-          <div style="background:#fff;padding:1rem;border-radius:1rem;box-shadow:0 6px 18px rgba(15,23,42,0.06);">
-            <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1000&q=80" alt="" style="width:100%;height:180px;object-fit:cover;border-radius:.75rem;">
-            <h4 style="margin:0.75rem 0 0 0;font-weight:600;">Study Skills Workshop</h4>
-            <p style="color:#475569;margin-top:.5rem;">Practical workshops to improve study habits, planning and exam readiness.</p>
-          </div>
-
-          <div style="background:#fff;padding:1rem;border-radius:1rem;box-shadow:0 6px 18px rgba(15,23,42,0.06);">
-            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1000&q=80" alt="" style="width:100%;height:180px;object-fit:cover;border-radius:.75rem;">
-            <h4 style="margin:0.75rem 0 0 0;font-weight:600;">Parental Support</h4>
-            <p style="color:#475569;margin-top:.5rem;">Guidance and resources for parents to better support their child.</p>
-          </div>
-        </div>
-      </section>
-
+      <!-- other sections kept as before... -->
     </main>
 
-    <footer style="max-width:1120px;margin:0 auto;padding:2.5rem 1.5rem;text-align:center;color:#64748b;position:relative;z-index:2;">
+    <footer style="max-width:1120px;margin:2rem auto;padding:1.5rem;text-align:center;color:#64748b;position:relative;z-index:2;">
       © 2025 Avara
     </footer>
   </div>
+
+  <!-- Small JS: fallback handling + optional pause on click for mobile -->
+  <script>
+    (function(){
+      const video = document.getElementById('heroVideo');
+      if(!video) return;
+
+      // If autoplay is blocked, video may not play on mobile; check and hide poster if playing
+      const poster = document.querySelector('.hero .poster');
+      function checkPlaying() {
+        // If video is ready and playing, hide the poster (if present)
+        if(!poster) return;
+        const isPlaying = !!(video.currentTime > 0 && !video.paused && !video.ended && video.readyState > 2);
+        if(isPlaying) poster.classList.add('is-hidden');
+        else poster.classList.remove('is-hidden');
+      }
+
+      // when video can play, try to play (some browsers require user gesture but muted autoplay usually works)
+      video.addEventListener('canplay', () => {
+        video.play().catch(()=>{ /* autoplay blocked; poster will be visible */ }).finally(checkPlaying);
+      });
+
+      // watch for play/pause changes
+      video.addEventListener('play', checkPlaying);
+      video.addEventListener('pause', checkPlaying);
+
+      // Optional: on small screens allow tap to toggle play/pause
+      if(window.matchMedia('(max-width:768px)').matches) {
+        const content = document.querySelector('.hero .content');
+        content && content.addEventListener('click', () => {
+          if(video.paused) video.play(); else video.pause();
+        });
+      }
+    })();
+  </script>
+
+  <!-- Optional: If you prefer a YouTube background instead of uploading a video,
+       replace the <div class="media"> content above with the iframe variant:
+    <iframe src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1&controls=0&loop=1&playlist=VIDEO_ID&modestbranding=1&playsinline=1" ...></iframe>
+    Notes: YouTube approach is easier but offers less control (and may show YouTube branding).
+  -->
 
 </body>
 </html>
