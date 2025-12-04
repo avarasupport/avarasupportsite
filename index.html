@@ -1,205 +1,172 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Avara Support — Coaching for ADHD &amp; Autism</title>
-<meta name="description" content="Avara Support: personalised coaching and mentoring for students with ADHD and autism. Academic coaching, mentoring, study skills and parental support."/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script>
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            primary: "#2563EB",
-            "background-light": "#FFF7F0",
-            "background-dark": "#1F2937",
-          },
-          fontFamily: {
-            display: ["Playfair Display", "serif"],
-            sans: ["Poppins", "sans-serif"],
-          },
-          borderRadius: {
-            DEFAULT: "1rem",
-          },
-        },
-      },
-    };
-  </script>
-<style>
-    body { font-family: 'Poppins', sans-serif; }
-    /* make the header brand align nicely for small screens */
-    .brand { display:flex; align-items:center; gap:0.6rem; }
-    .brand svg { height:36px; width:36px; flex:0 0 36px; }
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Avara — Coaching for ADHD &amp; Autism</title>
+  <meta name="description" content="Avara: personalised coaching and mentoring for students with ADHD and autism."/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{
+      --brand-color:#0f172a;
+      --accent:#2563EB;
+      --watermark-opacity:0.06;
+    }
+    body { font-family: "Poppins", sans-serif; background:#FFF7F0; color:#0f172a; }
+    .brand { display:flex; align-items:center; gap:.6rem; text-decoration:none; z-index:2; }
+    .brand-img { height:44px; width:auto; object-fit:contain; flex-shrink:0; border-radius:4px; }
+    .brand-name { font-family:"Playfair Display", serif; font-size:1.6rem; font-weight:700; color:var(--brand-color); }
+    @media(min-width:1024px){ .brand-img{height:56px} .brand-name{font-size:2rem} }
+
+    /* watermark */
+    .brand-background{ position:relative; z-index:1; overflow:visible; }
+    .brand-background::before{
+      content:"";
+      position:absolute; inset:0;
+      background-image: url('/assets/avara-logo.png');
+      background-repeat:no-repeat;
+      background-position:50% 18%;
+      background-size:75%;
+      opacity:var(--watermark-opacity);
+      filter:saturate(0%);
+      pointer-events:none; z-index:0; transform:translateY(-4%); mix-blend-mode:multiply;
+    }
+    @media(max-width:768px){
+      .brand-background::before{ background-size:120%; opacity:0.04; background-position:50% 10%; }
+    }
+    .brand-background > * { position:relative; z-index:2; }
+
+    .header-links a { color: rgba(15,23,42,0.75); text-decoration:none; padding:0 .5rem; transition: color .18s ease; }
+    .header-links a:hover{ color:var(--accent); transform:translateY(-2px); }
+
+    .hero-cta { background:var(--accent); color:#fff; padding:.9rem 1.2rem; border-radius:.6rem; display:inline-block; font-weight:600; }
+    .card-img { width:100%; height:220px; object-fit:cover; border-radius:.6rem; }
+    .icon-round { width:80px; height:80px; border-radius:14px; object-fit:cover; display:block; margin:0 auto; }
   </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-slate-700 dark:text-slate-300">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <header class="flex flex-col items-center py-10">
-    <div class="flex items-center gap-4">
-      <!-- Inline SVG + text brand so the logo never 404s -->
-      <a class="brand" href="index.html" aria-label="Avara Support home">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
-          <rect width="24" height="24" rx="5" fill="#2563EB"></rect>
-          <path d="M7 12l3 3 7-7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        </svg>
-        <span class="text-2xl font-display font-bold text-slate-900 dark:text-white">Avara Support</span>
+<body>
+  <!-- header -->
+  <header class="site-header">
+    <div class="max-w-7xl mx-auto px-6 py-8 flex items-center justify-between">
+      <a class="brand" href="index.html" aria-label="Avara home">
+        <img class="brand-img" src="/assets/avara-logo.png" alt="Avara logo" />
+        <span class="brand-name">Avara</span>
       </a>
-    </div>
 
-    <nav class="hidden md:flex items-center gap-10 text-slate-600 dark:text-slate-300 font-medium mt-8">
-      <a class="hover:text-primary dark:hover:text-primary" href="#about">About</a>
-      <a class="hover:text-primary dark:hover:text-primary" href="#methodology">Methodology</a>
-      <a class="hover:text-primary dark:hover:text-primary" href="#services">Services</a>
-      <a class="hover:text-primary dark:hover:text-primary" href="#testimonials">Testimonials</a>
-      <a class="hover:text-primary dark:hover:text-primary" href="contact.html">Contact</a>
-    </nav>
-    <button class="md:hidden mt-6" aria-label="Open menu">
-      <span class="material-symbols-outlined text-slate-800 dark:text-slate-200 text-3xl">menu</span>
-    </button>
+      <nav class="header-links" role="navigation" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#methodology">Methodology</a>
+        <a href="#services">Services</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <main class="py-20 md:py-24">
-    <div class="grid md:grid-cols-2 gap-20 items-center">
-      <div class="text-center md:text-left" id="about">
-        <h1 class="text-5xl md:text-6xl font-display font-bold text-slate-900 dark:text-white leading-tight">Empowering Students with ADHD &amp; Autism</h1>
-        <p class="mt-6 text-lg text-slate-600 dark:text-slate-400 max-w-lg mx-auto md:mx-0">Unlock your potential with personalised coaching and mentoring for academic success and personal growth.</p>
-        <a class="mt-10 inline-block bg-primary text-white font-semibold py-4 px-10 rounded-lg hover:opacity-90 transition-opacity text-lg" href="contact.html">Get Started</a>
-      </div>
-      <div class="relative">
-        <div class="absolute -inset-8 bg-orange-100 dark:bg-slate-700/50 rounded-[3rem] transform -rotate-3"></div>
-        <div class="relative">
-          <img alt="Mentor helping a student with studies" class="rounded-2xl shadow-xl w-full h-auto object-cover" src="https://images.unsplash.com/photo-1559757175-570b0b8336d5?auto=format&fit=crop&w=1400&q=80"/>
+  <!-- watermark wrapper: keep this around the page content -->
+  <div class="brand-background">
+    <main class="max-w-7xl mx-auto px-6">
+      <!-- hero -->
+      <section class="grid md:grid-cols-2 gap-12 items-center py-16">
+        <div>
+          <h1 class="text-5xl md:text-6xl font-serif font-bold leading-tight" style="font-family:'Playfair Display',serif">Empowering Students with ADHD &amp; Autism</h1>
+          <p class="mt-6 text-lg text-slate-700 max-w-lg">Unlock your potential with personalised coaching and mentoring for academic success and personal growth.</p>
+          <a class="hero-cta mt-8 inline-block" href="contact.html">Get Started</a>
         </div>
-      </div>
-    </div>
-  </main>
 
-  <section class="py-20 md:py-28" id="methodology">
-    <h2 class="text-4xl font-display font-bold text-center text-slate-900 dark:text-white mb-20">Methodology &amp; Approach</h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-      <div class="text-center">
-        <div class="bg-white dark:bg-slate-800/50 p-6 rounded-2xl inline-block shadow-sm">
-          <img alt="Strength based coaching icon" class="h-16 w-16 mx-auto rounded" src="https://images.unsplash.com/photo-1555435026-66d2d5fc4b4e?auto=format&fit=crop&w=400&q=60"/>
+        <div>
+          <!-- hero image: stable Unsplash link -->
+          <img alt="Mentor helping a student with studies" class="rounded-2xl shadow-xl w-full h-[360px] object-cover" src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1400&q=80"/>
         </div>
-        <h3 class="mt-6 font-bold text-lg text-slate-800 dark:text-slate-200">Strength-Based Coaching</h3>
-        <p class="mt-2 text-slate-600 dark:text-slate-400">Focusing on individual talents to build confidence and drive success.</p>
-      </div>
+      </section>
 
-      <div class="text-center">
-        <div class="bg-white dark:bg-slate-800/50 p-6 rounded-2xl inline-block shadow-sm">
-          <img alt="Personalised plans icon" class="h-16 w-16 mx-auto rounded" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=60"/>
-        </div>
-        <h3 class="mt-6 font-bold text-lg text-slate-800 dark:text-slate-200">Personalised Learning Plans</h3>
-        <p class="mt-2 text-slate-600 dark:text-slate-400">Custom roadmaps that adapt to each student's unique learning style.</p>
-      </div>
-
-      <div class="text-center">
-        <div class="bg-white dark:bg-slate-800/50 p-6 rounded-2xl inline-block shadow-sm">
-          <img alt="Executive function skills icon" class="h-16 w-16 mx-auto rounded" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=400&q=60"/>
-        </div>
-        <h3 class="mt-6 font-bold text-lg text-slate-800 dark:text-slate-200">Executive Function Skill Building</h3>
-        <p class="mt-2 text-slate-600 dark:text-slate-400">Developing crucial skills for organisation and time management.</p>
-      </div>
-
-      <div class="text-center">
-        <div class="bg-white dark:bg-slate-800/50 p-6 rounded-2xl inline-block shadow-sm">
-          <img alt="Parent collaboration icon" class="h-16 w-16 mx-auto rounded" src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=400&q=60"/>
-        </div>
-        <h3 class="mt-6 font-bold text-lg text-slate-800 dark:text-slate-200">Parent Collaboration</h3>
-        <p class="mt-2 text-slate-600 dark:text-slate-400">Working together with parents to create a supportive ecosystem.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-20 md:py-28" id="services">
-    <h2 class="text-4xl font-display font-bold text-center text-slate-900 dark:text-white mb-20">Services</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-      <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-md transition-shadow hover:shadow-xl flex flex-col">
-        <img alt="Academic coaching" class="rounded-lg mb-6 w-full h-48 object-contain" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1000&q=80"/>
-        <h3 class="text-xl font-bold text-slate-800 dark:text-white flex items-center gap-2"><span class="material-symbols-outlined text-primary">school</span>Academic Coaching</h3>
-        <p class="mt-3 text-slate-600 dark:text-slate-400 flex-grow">Personalised 1-on-1 academic support tailored to the student's needs.</p>
-      </div>
-
-      <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-md transition-shadow hover:shadow-xl flex flex-col">
-        <img alt="Mentoring" class="rounded-lg mb-6 w-full h-48 object-contain" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1000&q=80"/>
-        <h3 class="text-xl font-bold text-slate-800 dark:text-white flex items-center gap-2"><span class="material-symbols-outlined text-primary">groups</span>Mentoring</h3>
-        <p class="mt-3 text-slate-600 dark:text-slate-400 flex-grow">Motivational mentoring to build skills, confidence and resilience.</p>
-      </div>
-
-      <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-md transition-shadow hover:shadow-xl flex flex-col">
-        <img alt="Study workshop" class="rounded-lg mb-6 w-full h-48 object-contain" src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1000&q=80"/>
-        <h3 class="text-xl font-bold text-slate-800 dark:text-white flex items-center gap-2"><span class="material-symbols-outlined text-primary">task</span>Study Skills Workshop</h3>
-        <p class="mt-3 text-slate-600 dark:text-slate-400 flex-grow">Practical workshops to improve study habits, planning and exam readiness.</p>
-      </div>
-
-      <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-md transition-shadow hover:shadow-xl flex flex-col">
-        <img alt="Parental support" class="rounded-lg mb-6 w-full h-48 object-contain" src="https://images.unsplash.com/photo-1519098901909-b1553a58a2d7?auto=format&fit=crop&w=1000&q=80"/>
-        <h3 class="text-xl font-bold text-slate-800 dark:text-white flex items-center gap-2"><span class="material-symbols-outlined text-primary">escalator_warning</span>Parental Support</h3>
-        <p class="mt-3 text-slate-600 dark:text-slate-400 flex-grow">Guidance and resources for parents to better support their child.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-20 md:py-28" id="testimonials">
-    <div class="grid lg:grid-cols-2 gap-20 items-start">
-      <div>
-        <h2 class="text-4xl font-display font-bold text-slate-900 dark:text-white mb-10">Testimonials</h2>
-        <div class="space-y-8">
-          <div class="bg-orange-100 dark:bg-slate-800 p-8 rounded-2xl">
-            <p class="text-slate-700 dark:text-slate-300">"Avara's coaching has been a game-changer for our family. Our son is more organised, motivated, and his grades reflect his true potential."</p>
-            <p class="mt-6 font-bold text-slate-800 dark:text-white">Sarah</p>
-            <p class="text-sm text-slate-600 dark:text-slate-400">Parent</p>
+      <!-- methodology (icons/images) -->
+      <section id="methodology" class="py-12">
+        <h2 class="text-3xl font-display font-bold text-center mb-8">Methodology &amp; Approach</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div class="text-center">
+            <img class="icon-round" src="https://images.unsplash.com/photo-1555435026-66d2d5fc4b4e?auto=format&fit=crop&w=400&q=80" alt="Strength-based coaching"/>
+            <h3 class="mt-4 font-semibold">Strength-Based Coaching</h3>
+            <p class="text-slate-700">Focusing on individual talents to build confidence and drive success.</p>
           </div>
-          <div class="bg-orange-100 dark:bg-slate-800 p-8 rounded-2xl">
-            <p class="text-slate-700 dark:text-slate-300">"I've learned how to manage my time and study in a way that works for me. My coach makes learning enjoyable and effective."</p>
-            <p class="mt-6 font-bold text-slate-800 dark:text-white">Alex</p>
-            <p class="text-sm text-slate-600 dark:text-slate-400">Student</p>
+
+          <div class="text-center">
+            <img class="icon-round" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80" alt="Plans"/>
+            <h3 class="mt-4 font-semibold">Personalised Learning Plans</h3>
+            <p class="text-slate-700">Custom roadmaps that adapt to each student's unique learning style.</p>
           </div>
-          <div class="bg-orange-100 dark:bg-slate-800 p-8 rounded-2xl">
-            <p class="text-slate-700 dark:text-slate-300">"The support we received helped us understand our daughter's needs better. The collaborative approach has improved our home and school life dramatically."</p>
-            <p class="mt-6 font-bold text-slate-800 dark:text-white">Michael</p>
-            <p class="text-sm text-slate-600 dark:text-slate-400">Parent</p>
+
+          <div class="text-center">
+            <img class="icon-round" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=400&q=80" alt="Executive skills"/>
+            <h3 class="mt-4 font-semibold">Executive Function Skill Building</h3>
+            <p class="text-slate-700">Developing crucial skills for organisation and time management.</p>
+          </div>
+
+          <div class="text-center">
+            <img class="icon-round" src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=400&q=80" alt="Parents"/>
+            <h3 class="mt-4 font-semibold">Parent Collaboration</h3>
+            <p class="text-slate-700">Working together with parents to create a supportive ecosystem.</p>
           </div>
         </div>
-        <div class="flex justify-center mt-10 space-x-3">
-          <button class="w-3 h-3 bg-primary rounded-full" aria-hidden="true"></button>
-          <button class="w-3 h-3 bg-slate-300 dark:bg-slate-600 rounded-full" aria-hidden="true"></button>
-          <button class="w-3 h-3 bg-slate-300 dark:bg-slate-600 rounded-full" aria-hidden="true"></button>
-        </div>
-      </div>
+      </section>
 
-      <div id="contact">
-        <h2 class="text-4xl font-display font-bold text-slate-900 dark:text-white mb-10">Contact</h2>
-        <div class="bg-white dark:bg-slate-800 p-10 rounded-2xl shadow-md space-y-6">
-          <p class="text-slate-600 dark:text-slate-400">We now have a dedicated contact page. Click <a href="contact.html" class="text-primary">here</a> to go to the full contact form.</p>
-          <a class="inline-block bg-primary text-white font-semibold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity text-lg" href="contact.html">Open contact form</a>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
+      <!-- services -->
+      <section id="services" class="py-16">
+        <h2 class="text-3xl font-display font-bold text-center mb-10">Services</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="bg-white p-6 rounded-2xl shadow">
+            <img class="card-img mb-4" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1000&q=80" alt="Academic coaching"/>
+            <h4 class="font-semibold">Academic Coaching</h4>
+            <p class="text-slate-700 mt-2">Personalised 1-on-1 academic support tailored to the student's needs.</p>
+          </div>
 
-<footer class="bg-white dark:bg-slate-800/50 mt-20">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <div class="flex flex-col md:flex-row justify-between items-center gap-10">
-      <div class="flex items-center gap-3">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8">
-          <rect width="24" height="24" rx="5" fill="#2563EB"></rect>
-          <path d="M7 12l3 3 7-7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        </svg>
-        <span class="text-2xl font-bold text-slate-700 dark:text-slate-300">Avara Support</span>
-      </div>
-      <div class="flex gap-8 text-slate-600 dark:text-slate-300">
-        <a class="hover:text-primary" href="#">Privacy Policy</a>
-        <a class="hover:text-primary" href="#">Terms of Service</a>
-      </div>
-      <div class="text-sm text-slate-500 dark:text-slate-400 text-center md:text-right">
-        ©️ 2024 Avara Support. All rights reserved.
-      </div>
-    </div>
+          <div class="bg-white p-6 rounded-2xl shadow">
+            <img class="card-img mb-4" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1000&q=80" alt="Mentoring"/>
+            <h4 class="font-semibold">Mentoring</h4>
+            <p class="text-slate-700 mt-2">Motivational mentoring to build skills, confidence and resilience.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl shadow">
+            <img class="card-img mb-4" src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1000&q=80" alt="Workshops"/>
+            <h4 class="font-semibold">Study Skills Workshop</h4>
+            <p class="text-slate-700 mt-2">Practical workshops to improve study habits, planning and exam readiness.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl shadow">
+            <img class="card-img mb-4" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1000&q=80" alt="Parental support"/>
+            <h4 class="font-semibold">Parental Support</h4>
+            <p class="text-slate-700 mt-2">Guidance and resources for parents to better support their child.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- testimonials + contact short -->
+      <section id="testimonials" class="py-16">
+        <div class="grid lg:grid-cols-2 gap-12">
+          <div>
+            <h3 class="text-2xl font-display font-bold mb-6">Testimonials</h3>
+            <div class="space-y-6">
+              <blockquote class="bg-orange-100 p-6 rounded-lg">"Avara's coaching has been a game-changer for our family."</blockquote>
+              <blockquote class="bg-orange-100 p-6 rounded-lg">"I've learned how to manage my time and study in a way that works for me."</blockquote>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-display font-bold mb-6">Contact</h3>
+            <div class="bg-white p-6 rounded-2xl shadow">
+              <p>We now have a full contact page — <a href="contact.html" class="text-blue-600">open the form</a>.</p>
+              <a href="contact.html" class="inline-block mt-4 hero-cta">Open contact form</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- footer -->
+    <footer class="max-w-7xl mx-auto px-6 py-12 text-center text-sm text-slate-600">
+      © 2025 Avara. All rights reserved.
+    </footer>
   </div>
-</footer>
-</body></html>
+</body>
+</html>
