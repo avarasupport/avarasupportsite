@@ -25,18 +25,16 @@
 
         <!-- FormSubmit example; replace hello@avarasupport.co.uk with your real email or replace action with Formspree endpoint -->
         <form action="https://formsubmit.co/hello@avarasupport.co.uk" method="POST" class="space-y-6">
-          <input type="hidden" name="_subject" value="New message from avarasupport.co.uk">
-          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_subject" value="New contact from avarasupport.co.uk"/>
+          <input type="hidden" name="_captcha" value="false"/>
           <div>
-            <label class="block text-sm font-medium text-slate-700 mb-2" for="name">Full name</label>
-            <input id="name" name="name" required class="w-full rounded-lg border border-slate-200 p-3 bg-slate-50 focus:ring-primary focus:border-primary" />
+            <label class="block text-sm font-medium text-slate-700 mb-2" for="name">Name</label>
+            <input class="block w-full bg-slate-50 dark:bg-slate-700 border-slate-300 dark:border-slate-600 rounded-lg shadow-sm focus:ring-primary focus:border-primary py-3" id="name" name="name" type="text" required/>
           </div>
-
           <div>
             <label class="block text-sm font-medium text-slate-700 mb-2" for="email">Email</label>
-            <input id="email" name="email" type="email" required class="w-full rounded-lg border border-slate-200 p-3 bg-slate-50 focus:ring-primary focus:border-primary" />
+            <input class="block w-full bg-slate-50 dark:bg-slate-700 border-slate-300 dark:border-slate-600 rounded-lg shadow-sm focus:ring-primary focus:border-primary py-3" id="email" name="email" type="email" required/>
           </div>
-
           <div>
             <label class="block text-sm font-medium text-slate-700 mb-2" for="service">Service of interest</label>
             <select id="service" name="service" class="w-full rounded-lg border border-slate-200 p-3 bg-slate-50">
@@ -46,14 +44,12 @@
               <option>Parental Support</option>
             </select>
           </div>
-
           <div>
             <label class="block text-sm font-medium text-slate-700 mb-2" for="message">Message</label>
-            <textarea id="message" name="message" rows="6" required class="w-full rounded-lg border border-slate-200 p-3 bg-slate-50"></textarea>
+            <textarea class="block w-full bg-slate-50 dark:bg-slate-700 border-slate-300 dark:border-slate-600 rounded-lg shadow-sm focus:ring-primary focus:border-primary" id="message" name="message" rows="6" required></textarea>
           </div>
-
           <div class="flex items-center gap-4">
-            <button type="submit" class="bg-primary text-white py-3 px-6 rounded-lg font-semibold hover:opacity-90">Send message</button>
+            <button class="bg-primary text-white py-3 px-6 rounded-lg font-semibold hover:opacity-90" type="submit">Send message</button>
             <a href="mailto:hello@avarasupport.co.uk" class="text-sm text-slate-600">Or email hello@avarasupport.co.uk</a>
           </div>
         </form>
