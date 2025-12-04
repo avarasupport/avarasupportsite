@@ -40,6 +40,35 @@ body {
   --transition: 180ms ease-out;
 }
 
+/* ========== PAGE WATERMARK ========== */
+
+.page-watermark {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.05; /* adjust strength here */
+}
+
+.page-watermark::before {
+  content: "";
+  background: url("assets/avara-logo.png") no-repeat center / contain;
+  width: min(70vw, 900px);
+  height: min(30vw, 350px);
+  filter: grayscale(1);
+}
+
+/* Make actual content sit above watermark */
+.site-header,
+main,
+.site-footer {
+  position: relative;
+  z-index: 1;
+}
+
 /* ========== GLOBAL LAYOUT ========== */
 
 .container {
