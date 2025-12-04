@@ -1,18 +1,17 @@
 :root{
-  --brand-color: #0f172a;        /* brand text color */
-  --accent: #2563EB;             /* site primary color */
-  --watermark-opacity: 0.06;     /* image watermark opacity */
-  --watermark-scale-lg: 0.75;    /* watermark size on large screens */
-  --watermark-scale-sm: 1.2;     /* watermark size on small screens */
+  --brand-color: #0f172a;
+  --accent: #2563EB;
+  --watermark-opacity: 0.06;
+  --watermark-scale-lg: 0.75;
+  --watermark-scale-sm: 1.2;
 }
 
-/* header brand layout */
 .brand {
   display:flex;
   align-items:center;
   gap:0.6rem;
   text-decoration:none;
-  z-index:2; /* sits above watermark */
+  z-index:2;
 }
 
 .brand-img {
@@ -24,7 +23,6 @@
   border-radius:4px;
 }
 
-/* brand name "Avara" (visible in header) */
 .brand-name{
   font-family: "Playfair Display", serif;
   font-size:1.6rem;
@@ -34,21 +32,17 @@
   letter-spacing:-0.02em;
 }
 
-/* larger header on wide screens */
 @media(min-width:1024px){
   .brand-img { height:56px; }
   .brand-name { font-size:2.0rem; }
 }
 
-/* --- Brand background watermark (image) --- */
-/* Wrap the main content with .brand-background to show watermark behind everything */
 .brand-background{
   position:relative;
   z-index:1;
   overflow:visible;
 }
 
-/* Use a pseudo-element to place a centered large watermark behind content */
 .brand-background::before{
   content: "";
   position: absolute;
@@ -59,14 +53,13 @@
   background-position: 50% 20%;
   background-size: calc(var(--watermark-scale-lg) * 100%);
   opacity: var(--watermark-opacity);
-  filter: saturate(0%) blur(0.2px); /* subtle, desaturated watermark */
+  filter: saturate(0%) blur(0.2px);
   pointer-events: none;
   z-index: 0;
   transform: translateY(-4%);
   mix-blend-mode: multiply;
 }
 
-/* Make watermark less intrusive on small screens */
 @media(max-width:768px){
   .brand-background::before{
     background-size: calc(var(--watermark-scale-sm) * 100%);
@@ -75,37 +68,11 @@
   }
 }
 
-/* ensure content appears above watermark */
 .brand-background > * {
   position: relative;
   z-index: 2;
 }
 
-/* --- Alternative: typographic watermark (uncomment if you prefer text watermark) ---
-   If you prefer a crisp typographic watermark (no image file), comment out the
-   .brand-background::before block above and uncomment the block below.
-*/
-/*
-.brand-background::before {
-  content: "Avara";
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Playfair Display", serif;
-  font-size: clamp(72px, 18vw, 220px);
-  font-weight: 700;
-  color: var(--brand-color);
-  opacity: 0.04;
-  transform: translateY(-8%);
-  pointer-events: none;
-  z-index: 0;
-  letter-spacing: -0.02em;
-}
-*/
-
-/* small polish for header nav */
 .header-links a {
   color: rgba(15,23,42,0.75);
   text-decoration: none;
@@ -114,7 +81,6 @@
 }
 .header-links a:hover{ color: var(--accent); transform: translateY(-2px); }
 
-/* make sure interactive elements sit above watermark */
 .brand-background a,
 .brand-background button,
 .brand-background input,
@@ -123,31 +89,6 @@
   z-index: 3;
 }
 
-/* Optional puzzle-corner pieces: if you upload /assets/puzzle-corner.png
-   uncomment the rules below to show puzzle corners in the page */
- /*
-.puzzle-corners{ position:absolute; inset:0; pointer-events:none; z-index:0; }
-.puzzle-corners::before,
-.puzzle-corners::after,
-.puzzle-corners .bottom-left,
-.puzzle-corners .bottom-right {
-  content:"";
-  position:absolute;
-  width:64px;
-  height:64px;
-  background-image:url('/assets/puzzle-corner.png');
-  background-size:contain;
-  background-repeat:no-repeat;
-  opacity:0.9;
-  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.06));
-}
-.puzzle-corners::before{ top:12px; left:12px; }
-.puzzle-corners::after{ top:12px; right:12px; }
-.puzzle-corners .bottom-left{ bottom:12px; left:12px; }
-.puzzle-corners .bottom-right{ bottom:12px; right:12px; }
-*/
-
-/* Accessibility: ensure header brand is visible in high contrast mode */
 @media (prefers-contrast: more) {
   .brand-name { color: #000; }
   .brand-img { filter: none; }
