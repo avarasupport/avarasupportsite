@@ -7,13 +7,15 @@
   <meta name="description" content="Avara: personalised coaching and mentoring for students with ADHD and autism."/>
   <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <!-- LINK LINE: branding stylesheet (make sure assets/site-branding.css exists) -->
+  <link rel="stylesheet" href="/assets/site-branding.css">
   <style>
     :root{
       --brand-color:#0f172a;
       --accent:#2563EB;
       --watermark-opacity:0.06;
     }
-    body { font-family: "Poppins", sans-serif; background:#FFF7F0; color:#0f172a; }
+    body { font-family: "Poppins", sans-serif; background:#FFF7F0; color:#0f172a; margin:0; }
     .brand { display:flex; align-items:center; gap:.6rem; text-decoration:none; z-index:2; }
     .brand-img { height:44px; width:auto; object-fit:contain; flex-shrink:0; border-radius:4px; }
     .brand-name { font-family:"Playfair Display", serif; font-size:1.6rem; font-weight:700; color:var(--brand-color); }
@@ -40,21 +42,36 @@
     .header-links a { color: rgba(15,23,42,0.75); text-decoration:none; padding:0 .5rem; transition: color .18s ease; }
     .header-links a:hover{ color:var(--accent); transform:translateY(-2px); }
 
-    .hero-cta { background:var(--accent); color:#fff; padding:.9rem 1.2rem; border-radius:.6rem; display:inline-block; font-weight:600; }
+    .hero-cta { background:var(--accent); color:#fff; padding:.9rem 1.2rem; border-radius:.6rem; display:inline-block; font-weight:600; text-decoration:none; }
     .card-img { width:100%; height:220px; object-fit:cover; border-radius:.6rem; }
     .icon-round { width:80px; height:80px; border-radius:14px; object-fit:cover; display:block; margin:0 auto; }
+    .max-w-7xl { max-width:1120px; }
+    .mx-auto { margin-left:auto; margin-right:auto; }
+    .px-6 { padding-left:1.5rem; padding-right:1.5rem; }
+    .py-8 { padding-top:2rem; padding-bottom:2rem; }
+    .py-12 { padding-top:3rem; padding-bottom:3rem; }
+    .py-16 { padding-top:4rem; padding-bottom:4rem; }
+    .text-5xl { font-size:3rem; line-height:1.05; }
+    .text-3xl { font-size:1.875rem; }
+    .text-lg { font-size:1.125rem; }
+    .font-serif { font-family:'Playfair Display', serif; }
+    .font-display { font-family:'Playfair Display', serif; }
+    .rounded-2xl { border-radius:1rem; }
+    .shadow-xl { box-shadow: 0 10px 30px rgba(15,23,42,0.08); }
+    .bg-white { background:#fff; }
   </style>
 </head>
 <body>
   <!-- header -->
-  <header class="site-header">
-    <div class="max-w-7xl mx-auto px-6 py-8 flex items-center justify-between">
-      <a class="brand" href="index.html" aria-label="Avara home">
+  <header class="site-header" role="banner">
+    <div class="max-w-7xl mx-auto px-6 py-8" style="display:flex;align-items:center;justify-content:space-between;">
+      <a class="brand" href="index.html" aria-label="Avara home" style="display:flex;align-items:center;">
+        <!-- Make sure /assets/avara-logo.png exists in your repo -->
         <img class="brand-img" src="/assets/avara-logo.png" alt="Avara logo" />
         <span class="brand-name">Avara</span>
       </a>
 
-      <nav class="header-links" role="navigation" aria-label="Primary">
+      <nav class="header-links" role="navigation" aria-label="Primary" style="display:flex;gap:1rem;align-items:center;">
         <a href="#about">About</a>
         <a href="#methodology">Methodology</a>
         <a href="#services">Services</a>
@@ -68,95 +85,95 @@
   <div class="brand-background">
     <main class="max-w-7xl mx-auto px-6">
       <!-- hero -->
-      <section class="grid md:grid-cols-2 gap-12 items-center py-16">
+      <section class="grid" style="display:grid;grid-template-columns:1fr;gap:2rem;align-items:center;padding:4rem 0;">
         <div>
-          <h1 class="text-5xl md:text-6xl font-serif font-bold leading-tight" style="font-family:'Playfair Display',serif">Empowering Students with ADHD &amp; Autism</h1>
-          <p class="mt-6 text-lg text-slate-700 max-w-lg">Unlock your potential with personalised coaching and mentoring for academic success and personal growth.</p>
-          <a class="hero-cta mt-8 inline-block" href="contact.html">Get Started</a>
+          <h1 class="text-5xl font-serif font-bold leading-tight" style="font-family:'Playfair Display',serif;margin:0;">Empowering Students with ADHD &amp; Autism</h1>
+          <p class="mt-6 text-lg" style="margin-top:1.5rem;color:#475569;max-width:48rem;">Unlock your potential with personalised coaching and mentoring for academic success and personal growth.</p>
+          <a class="hero-cta mt-8 inline-block" href="contact.html" style="margin-top:1.5rem;display:inline-block;">Get Started</a>
         </div>
 
-        <div>
+        <div style="margin-top:2rem;">
           <!-- hero image: stable Unsplash link -->
-          <img alt="Mentor helping a student with studies" class="rounded-2xl shadow-xl w-full h-[360px] object-cover" src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1400&q=80"/>
+          <img alt="Mentor helping a student with studies" class="rounded-2xl shadow-xl" style="width:100%;height:360px;object-fit:cover;" src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1400&q=80"/>
         </div>
       </section>
 
       <!-- methodology (icons/images) -->
       <section id="methodology" class="py-12">
-        <h2 class="text-3xl font-display font-bold text-center mb-8">Methodology &amp; Approach</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <h2 class="text-3xl font-display font-bold text-center" style="text-align:center;margin:0 0 2rem 0;">Methodology &amp; Approach</h2>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;">
           <div class="text-center">
             <img class="icon-round" src="https://images.unsplash.com/photo-1555435026-66d2d5fc4b4e?auto=format&fit=crop&w=400&q=80" alt="Strength-based coaching"/>
-            <h3 class="mt-4 font-semibold">Strength-Based Coaching</h3>
-            <p class="text-slate-700">Focusing on individual talents to build confidence and drive success.</p>
+            <h3 style="margin-top:1rem;font-weight:600;">Strength-Based Coaching</h3>
+            <p style="color:#475569;">Focusing on individual talents to build confidence and drive success.</p>
           </div>
 
           <div class="text-center">
             <img class="icon-round" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80" alt="Plans"/>
-            <h3 class="mt-4 font-semibold">Personalised Learning Plans</h3>
-            <p class="text-slate-700">Custom roadmaps that adapt to each student's unique learning style.</p>
+            <h3 style="margin-top:1rem;font-weight:600;">Personalised Learning Plans</h3>
+            <p style="color:#475569;">Custom roadmaps that adapt to each student's unique learning style.</p>
           </div>
 
           <div class="text-center">
             <img class="icon-round" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=400&q=80" alt="Executive skills"/>
-            <h3 class="mt-4 font-semibold">Executive Function Skill Building</h3>
-            <p class="text-slate-700">Developing crucial skills for organisation and time management.</p>
+            <h3 style="margin-top:1rem;font-weight:600;">Executive Function Skill Building</h3>
+            <p style="color:#475569;">Developing crucial skills for organisation and time management.</p>
           </div>
 
           <div class="text-center">
             <img class="icon-round" src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=400&q=80" alt="Parents"/>
-            <h3 class="mt-4 font-semibold">Parent Collaboration</h3>
-            <p class="text-slate-700">Working together with parents to create a supportive ecosystem.</p>
+            <h3 style="margin-top:1rem;font-weight:600;">Parent Collaboration</h3>
+            <p style="color:#475569;">Working together with parents to create a supportive ecosystem.</p>
           </div>
         </div>
       </section>
 
       <!-- services -->
       <section id="services" class="py-16">
-        <h2 class="text-3xl font-display font-bold text-center mb-10">Services</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div class="bg-white p-6 rounded-2xl shadow">
+        <h2 class="text-3xl font-display font-bold text-center" style="text-align:center;margin:0 0 2.5rem 0;">Services</h2>
+        <div style="display:grid;grid-template-columns:1fr;gap:1.25rem;">
+          <div class="bg-white" style="padding:1.25rem;border-radius:1rem;box-shadow:0 6px 18px rgba(15,23,42,0.06);">
             <img class="card-img mb-4" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1000&q=80" alt="Academic coaching"/>
-            <h4 class="font-semibold">Academic Coaching</h4>
-            <p class="text-slate-700 mt-2">Personalised 1-on-1 academic support tailored to the student's needs.</p>
+            <h4 style="font-weight:600;margin:0.5rem 0 0;">Academic Coaching</h4>
+            <p style="color:#475569;margin-top:0.5rem;">Personalised 1-on-1 academic support tailored to the student's needs.</p>
           </div>
 
-          <div class="bg-white p-6 rounded-2xl shadow">
+          <div class="bg-white" style="padding:1.25rem;border-radius:1rem;box-shadow:0 6px 18px rgba(15,23,42,0.06);">
             <img class="card-img mb-4" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1000&q=80" alt="Mentoring"/>
-            <h4 class="font-semibold">Mentoring</h4>
-            <p class="text-slate-700 mt-2">Motivational mentoring to build skills, confidence and resilience.</p>
+            <h4 style="font-weight:600;margin:0.5rem 0 0;">Mentoring</h4>
+            <p style="color:#475569;margin-top:0.5rem;">Motivational mentoring to build skills, confidence and resilience.</p>
           </div>
 
-          <div class="bg-white p-6 rounded-2xl shadow">
+          <div class="bg-white" style="padding:1.25rem;border-radius:1rem;box-shadow:0 6px 18px rgba(15,23,42,0.06);">
             <img class="card-img mb-4" src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1000&q=80" alt="Workshops"/>
-            <h4 class="font-semibold">Study Skills Workshop</h4>
-            <p class="text-slate-700 mt-2">Practical workshops to improve study habits, planning and exam readiness.</p>
+            <h4 style="font-weight:600;margin:0.5rem 0 0;">Study Skills Workshop</h4>
+            <p style="color:#475569;margin-top:0.5rem;">Practical workshops to improve study habits, planning and exam readiness.</p>
           </div>
 
-          <div class="bg-white p-6 rounded-2xl shadow">
+          <div class="bg-white" style="padding:1.25rem;border-radius:1rem;box-shadow:0 6px 18px rgba(15,23,42,0.06);">
             <img class="card-img mb-4" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1000&q=80" alt="Parental support"/>
-            <h4 class="font-semibold">Parental Support</h4>
-            <p class="text-slate-700 mt-2">Guidance and resources for parents to better support their child.</p>
+            <h4 style="font-weight:600;margin:0.5rem 0 0;">Parental Support</h4>
+            <p style="color:#475569;margin-top:0.5rem;">Guidance and resources for parents to better support their child.</p>
           </div>
         </div>
       </section>
 
       <!-- testimonials + contact short -->
       <section id="testimonials" class="py-16">
-        <div class="grid lg:grid-cols-2 gap-12">
+        <div style="display:grid;grid-template-columns:1fr;gap:1.5rem;">
           <div>
-            <h3 class="text-2xl font-display font-bold mb-6">Testimonials</h3>
-            <div class="space-y-6">
-              <blockquote class="bg-orange-100 p-6 rounded-lg">"Avara's coaching has been a game-changer for our family."</blockquote>
-              <blockquote class="bg-orange-100 p-6 rounded-lg">"I've learned how to manage my time and study in a way that works for me."</blockquote>
+            <h3 class="text-2xl font-display font-bold" style="margin:0 0 1rem 0;">Testimonials</h3>
+            <div style="display:flex;flex-direction:column;gap:1rem;">
+              <blockquote class="bg-orange-100" style="padding:1rem;border-radius:0.75rem;">"Avara's coaching has been a game-changer for our family."</blockquote>
+              <blockquote class="bg-orange-100" style="padding:1rem;border-radius:0.75rem;">"I've learned how to manage my time and study in a way that works for me."</blockquote>
             </div>
           </div>
 
           <div>
-            <h3 class="text-2xl font-display font-bold mb-6">Contact</h3>
-            <div class="bg-white p-6 rounded-2xl shadow">
-              <p>We now have a full contact page — <a href="contact.html" class="text-blue-600">open the form</a>.</p>
-              <a href="contact.html" class="inline-block mt-4 hero-cta">Open contact form</a>
+            <h3 class="text-2xl font-display font-bold" style="margin:0 0 1rem 0;">Contact</h3>
+            <div class="bg-white" style="padding:1rem;border-radius:0.75rem;box-shadow:0 6px 18px rgba(15,23,42,0.06);">
+              <p style="margin:0 0 1rem 0;">We now have a full contact page — <a href="contact.html" style="color:var(--accent);">open the form</a>.</p>
+              <a href="contact.html" class="hero-cta" style="display:inline-block;margin-top:0.5rem;">Open contact form</a>
             </div>
           </div>
         </div>
@@ -164,7 +181,7 @@
     </main>
 
     <!-- footer -->
-    <footer class="max-w-7xl mx-auto px-6 py-12 text-center text-sm text-slate-600">
+    <footer class="max-w-7xl mx-auto px-6 py-12 text-center text-sm" style="color:#64748b;">
       © 2025 Avara. All rights reserved.
     </footer>
   </div>
